@@ -17,6 +17,28 @@ const Utils = NativeModules.Utils
       }
     );
 
+/**
+ * Multiplies first number with second number
+ * @param a - First number
+ * @param b - Second number
+ * @returns A promise containing the multiplication of `a` and `b`
+ */
 export function multiply(a: number, b: number): Promise<number> {
   return Utils.multiply(a, b);
+}
+
+/**
+ * Divides first number with second number
+ * @param a - First number
+ * @param b - Second number
+ * @returns A callback containing the multiplication of `a` and `b`
+ */
+export function divide(
+  a: number,
+  b: number,
+  callback: (result: number) => void
+): Promise<number> {
+  return Utils.divide(a, b, (result: number) => {
+    callback(result);
+  });
 }

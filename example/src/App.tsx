@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-utils';
+import { multiply, divide } from 'react-native-utils';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
@@ -10,6 +10,11 @@ export default function App() {
     multiply(3, 7).then(setResult);
   }, []);
 
+  React.useEffect(() => {
+    divide(1, 4, (divideResult) => {
+      console.log('RESULT IS: ', divideResult);
+    });
+  }, []);
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
