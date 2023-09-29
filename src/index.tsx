@@ -6,7 +6,16 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const Utils = NativeModules.Utils
+interface UtilsModule {
+  multiply: (a: number, b: number) => Promise<number>;
+  divide: (
+    a: number,
+    b: number,
+    callback: (result: number) => void
+  ) => Promise<number>;
+}
+
+const Utils: UtilsModule = NativeModules
   ? NativeModules.Utils
   : new Proxy(
       {},
@@ -37,8 +46,8 @@ export function divide(
   a: number,
   b: number,
   callback: (result: number) => void
-): Promise<number> {
-  return Utils.divide(a, b, (result: number) => {
+): void {
+  Utils.divide(a, b, (result: number) => {
     callback(result);
   });
 }
